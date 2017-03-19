@@ -43,22 +43,17 @@
 
 <script>
 
+	// hold words in an array so we can randomly select one later
+
 	var array_of_words = ["robben","messi","ronaldo","payet","cuauhtemoc","crouch"];
+
+	// need a function that will go to a random index so we can locate a random word
 
 	function random_index() {
 			return Math.floor(Math.random() * (array_of_words.length));
 		}
 
-	// var printing_spaces = function(word){
-		
-	// 	var spaces = "";
-	// 	for(var i = 0; i < word.length; i++){
-
-	// 		spaces = spaces + " - ";
-
-	// 	}
-	// 	return spaces;
-	// }
+	// wins start at 0 and go up. Guesses start at a certain number and go down as user tries different letters.
 
 	var wins = 0;
 	var guesses = 15;
@@ -90,9 +85,7 @@
 
 
 
-	 var blank_word = blank_space_filler(chosen_word,blank_array);
-
-	// var blank_spaces = printing_spaces(chosen_word);
+	var blank_word = blank_space_filler(chosen_word,blank_array);
 
 
 	var changing_guesses = 
@@ -151,14 +144,42 @@
 		if(contains(changing_word," _ ") === false){
 
 			alert("you won!!!")
-			location.reload();
+			// location.reload();
+
+			guesses = 15;
+
+			chosen_word = array_of_words[random_index()];
+
+			blank_array = [];
+
+			array_of_used_letters = [];
+
+			blank_word = blank_space_filler(chosen_word,blank_array);
+			document.querySelector("#letters_used").innerHTML = "";
+			document.querySelector("#current_word").innerHTML = blank_word.join("");
+			document.querySelector("#guesses_remaining_title").innerHTML = changing_guesses;
+			document.querySelector("#guesses_remaining_number").innerHTML = guesses;
+
 
 		}
 
 		if(guesses === 0){
 
 			alert("you lost!!!")
-			location.reload();
+			// location.reload();
+			guesses = 15;
+
+			chosen_word = array_of_words[random_index()];
+
+			blank_array = [];
+
+			array_of_used_letters = [];
+
+			blank_word = blank_space_filler(chosen_word,blank_array);
+			document.querySelector("#letters_used").innerHTML = "";
+			document.querySelector("#current_word").innerHTML = blank_word.join("");
+			document.querySelector("#guesses_remaining_title").innerHTML = changing_guesses;
+			document.querySelector("#guesses_remaining_number").innerHTML = guesses;
 
 		}
 
