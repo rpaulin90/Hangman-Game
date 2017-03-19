@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<title>Hangman-Game</title>
+</head>
+<body class="bg-info">
+
+	<div class="container-fluid bg-danger">
+		<div class="page-header text-center">
+			<h1>The Hangman Game</h1>
+		</div>
+	</div>
+
+	<div class="container-fluid" style="height: 100%; width: 100%">
+		<div class="jumbotron text-center" style="margin-top: 20px; background-color: #498d5c">
+			<div class="row">
+				<h2>
+					Press Any Key To Get Started
+				</h2>
+			</div>
+			<div class="row text-center">
+				<div class="col-xs-12" id="wins"></div>	
+			</div>
+			<div class="row text-center">
+				<div class="col-xs-12" id="current_word"></div>	
+			</div>
+			<div class="row text-center">
+				<div class="col-xs-12" id="guesses_remaining_title"></div>	
+			</div>
+			<div class="row text-center">
+				<div class="col-xs-12" id="guesses_remaining_number"></div>	
+			</div>
+			<div class="row text-center">
+				<div class="col-xs-12" id="letters_used_title"></div>	
+			</div>
+			<div class="row text-center">
+				<div class="col-xs-12" id="letters_used"></div>	
+			</div>
+		</div>
+	</div>
+
+<script>
+
+	var array_of_words = ["robben","messi","ronaldo","payet","cuauhtemoc","crouch"];
+
+	function random_index() {
+			return Math.floor(Math.random() * (array_of_words.length));
+		}
+
+	var printing_spaces = function(word){
+		
+		var spaces = "";
+		for(var i = 0; i < word.length; i++){
+
+			spaces = spaces + " - ";
+
+		}
+		return spaces;
+	}
+
+	var wins = 0;
+	var guesses = 15;
+
+	var chosen_word = array_of_words[random_index()];
+
+	var blank_spaces = printing_spaces(chosen_word);
+
+
+	var changing_guesses = 
+		"<p>Guesses left: </p>" + guesses;
+
+	document.querySelector("#current_word").innerHTML = blank_spaces;
+	document.querySelector("#guesses_remaining_number").innerHTML = changing_guesses;
+
+
+	document.onkeyup = function(event) {
+
+		var user_guess = event.key;
+
+		for(var i = 0; i < blank_spaces.length; i++)  {
+
+			if(chosen_word[i] === user_guess){
+
+				blank_spaces[i] = user_guess;
+				document.querySelector("#current_word").innerHTML = blank_spaces;
+
+			}
+
+			else {
+				guesses--;
+				document.querySelector("#guesses_remaining_number").innerHTML = changing_guesses;
+
+			}
+
+		}
+
+
+	}
+
+
+	
+
+</script>
+
+
+</body>
+</html>
