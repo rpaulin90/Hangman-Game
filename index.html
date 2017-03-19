@@ -49,58 +49,131 @@
 			return Math.floor(Math.random() * (array_of_words.length));
 		}
 
-	var printing_spaces = function(word){
+	// var printing_spaces = function(word){
 		
-		var spaces = "";
-		for(var i = 0; i < word.length; i++){
+	// 	var spaces = "";
+	// 	for(var i = 0; i < word.length; i++){
 
-			spaces = spaces + " - ";
+	// 		spaces = spaces + " - ";
 
-		}
-		return spaces;
-	}
+	// 	}
+	// 	return spaces;
+	// }
 
 	var wins = 0;
 	var guesses = 15;
 
 	var chosen_word = array_of_words[random_index()];
 
-	var blank_spaces = printing_spaces(chosen_word);
+	var blank_array = [];
+
+	var array_of_used_letters = [];
+
+	function blank_space_filler(word,array){
+		
+	 	for(var i = 0; i < word.length; i++){
+
+	 		array.push(" _ ");
+
+		}
+	 	return array;
+	 }
+
+	function contains(a, obj) {
+	    for (var i = 0; i < a.length; i++) {
+	        if (a[i] === obj) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+
+
+
+	 var blank_word = blank_space_filler(chosen_word,blank_array);
+
+	// var blank_spaces = printing_spaces(chosen_word);
 
 
 	var changing_guesses = 
-		"<p>Guesses left: </p>" + guesses;
+		"<p>Guesses left: </p>";
 
-	document.querySelector("#current_word").innerHTML = blank_spaces;
-	document.querySelector("#guesses_remaining_number").innerHTML = changing_guesses;
+	document.querySelector("#current_word").innerHTML = blank_word.join("");
+	document.querySelector("#guesses_remaining_title").innerHTML = changing_guesses;
+	document.querySelector("#guesses_remaining_number").innerHTML = guesses;
 
 
 	document.onkeyup = function(event) {
 
+		var changing_word = blank_word;
+
 		var user_guess = event.key;
 
-		for(var i = 0; i < blank_spaces.length; i++)  {
+		var counter = 0;
 
-			if(chosen_word[i] === user_guess){
+		var letter_title = "<p>You have already used: </p>";
 
-				blank_spaces[i] = user_guess;
-				document.querySelector("#current_word").innerHTML = blank_spaces;
+		// guesses = guesses - 1;
 
+		if(contains(array_of_used_letters,user_guess) !== true){
+			array_of_used_letters.push(user_guess);
+			guesses = guesses - 1;
+		}
+
+		// if(contains(array_of_used_letters,user_guess)){
+		// 	alert("you already used " + user_guess);
+		// }
+
+		console.log(chosen_word);
+
+		if(contains(chosen_word,user_guess)){
+			for(var i = 0; i < chosen_word.length; i++)  {
+
+						if(chosen_word[i] === user_guess){
+						changing_word[i] = " " + user_guess + " ";
+						document.querySelector("#current_word").innerHTML = changing_word.join("");
+					}
+
+					}
+				
 			}
+		
+		console.log(guesses);
+		document.querySelector("#guesses_remaining_number").innerHTML = guesses;
 
-			else {
-				guesses--;
-				document.querySelector("#guesses_remaining_number").innerHTML = changing_guesses;
 
-			}
+
+		document.querySelector("#letters_used_title").innerHTML = letter_title;
+
+
+		document.querySelector("#letters_used").innerHTML = array_of_used_letters;
+
+		if(contains(changing_word," _ ") === false){
+
+			alert("you won!!!")
+			location.reload();
+
+		}
+
+		if(guesses === 0){
+
+			alert("you lost!!!")
+			location.reload();
+
+		}
 
 		}
 
 
-	}
+		// 	else if(chosen_word[i] != user_guess){
+		// 		// guesses = guesses - 1;
+		// 		console.log(counter+1);
+		// 		// document.querySelector("#guesses_remaining_number").innerHTML = changing_guesses;
+		// 		break;
 
+		// 	}
 
-	
+		// }
 
 </script>
 
