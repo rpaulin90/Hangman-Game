@@ -3,45 +3,50 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker|VT323" rel="stylesheet">
 	<title>Hangman-Game</title>
 </head>
-<body class="bg-info">
+<body style="background-image: url(assets/images/grass_background.jpg); font-family: 'VT323', monospace;">
 
-	<div class="container-fluid bg-danger">
+	<div class="container bg-info" style="border-radius: 15px; opacity: 0.6">
 		<div class="page-header text-center">
-			<h1>The Hangman Game</h1>
+			<h1 style="font-family: 'Permanent Marker', cursive;">The Hangman Game</h1>
 		</div>
 	</div>
 
-	<div class="container-fluid" style="height: 100%; width: 100%">
-		<div class="jumbotron text-center" style="margin-top: 20px; background-color: #498d5c">
+	<div class="container" style="height: 100%">
+		<div class="jumbotron text-center" style="margin-top: 20px;background-color: #333333; color: white; opacity: 0.8">
 			<div class="row">
 				<h2>
 					Press Any Key To Get Started
 				</h2>
 			</div>
 			<div class="row text-center">
-				<div class="col-xs-12" id="wins"></div>	
+				<div class="col-xs-12" id="wins" style="font-size: 30px"></div>	
 			</div>
 			<div class="row text-center">
-				<div class="col-xs-12" id="current_word"></div>	
+				<div class="col-xs-12" id="current_word" style="font-size: 40px"></div>	
 			</div>
 			<div class="row text-center">
-				<div class="col-xs-12" id="guesses_remaining_title"></div>	
+				<div class="col-xs-12" id="guesses_remaining_title" style="font-size: 30px"></div>	
 			</div>
 			<div class="row text-center">
-				<div class="col-xs-12" id="guesses_remaining_number"></div>	
+				<div class="col-xs-12" id="guesses_remaining_number" style="font-size: 30px"></div>	
 			</div>
 			<div class="row text-center">
-				<div class="col-xs-12" id="letters_used_title"></div>	
+				<div class="col-xs-12" id="letters_used_title" style="font-size: 30px"></div>	
 			</div>
 			<div class="row text-center">
-				<div class="col-xs-12" id="letters_used"></div>	
+				<div class="col-xs-12" id="letters_used" style="font-size: 30px"></div>	
 			</div>
 		</div>
 	</div>
+	<div class="container text-center">
+			<div id="image_win" style="opacity: 0.9"></div>
+	</div>
 
 <script>
+
 
 	// hold words in an array so we can randomly select one later
 
@@ -56,6 +61,7 @@
 	// wins start at 0 and go up. Guesses start at a certain number and go down as user tries different letters.
 
 	var wins = 0;
+
 	var guesses = 15;
 
 	var chosen_word = array_of_words[random_index()];
@@ -89,12 +95,11 @@
 
 
 	var changing_guesses = 
-		"<p>Guesses left: </p>";
+		"<p style='font-size: 30px'>Guesses left: </p>";
 
 	document.querySelector("#current_word").innerHTML = blank_word.join("");
 	document.querySelector("#guesses_remaining_title").innerHTML = changing_guesses;
 	document.querySelector("#guesses_remaining_number").innerHTML = guesses;
-
 
 	document.onkeyup = function(event) {
 
@@ -104,18 +109,26 @@
 
 		var counter = 0;
 
-		var letter_title = "<p>You have already used: </p>";
+		var letter_title = "<p style='font-size: 30px'>You have already used: </p>";
 
-		// guesses = guesses - 1;
+		var messi_image = "<img class='col-xs-12' src='assets/images/messi.jpg' alt='Lionel Messi'>"
+
+		var crouch_image = "<img class='col-xs-12' src='assets/images/peter_crouch.jpg' alt='Peter Crouch'>"
+
+		var payet_image = "<img class='col-xs-12' src='assets/images/payet.jpg' alt='Dimitri Payet'>"
+
+		var cuau_image = "<img class='col-xs-12' src='assets/images/cuau.jpg' alt='Cuahutemoc Blanco'>"
+
+		var robben_image = "<img class='col-xs-12' src='assets/images/robben.jpg' alt='Arjen Robben'>"
+
+		var ronaldo_image = "<img class='col-xs-12' src='assets/images/ronaldo.jpg' alt='Cristiano Ronaldo'>"
+
+
 
 		if(contains(array_of_used_letters,user_guess) !== true){
 			array_of_used_letters.push(user_guess);
 			guesses = guesses - 1;
 		}
-
-		// if(contains(array_of_used_letters,user_guess)){
-		// 	alert("you already used " + user_guess);
-		// }
 
 		console.log(chosen_word);
 
@@ -131,7 +144,6 @@
 				
 			}
 		
-		console.log(guesses);
 		document.querySelector("#guesses_remaining_number").innerHTML = guesses;
 
 
@@ -146,6 +158,10 @@
 			alert("you won!!!")
 			// location.reload();
 
+			var winning_word = chosen_word;
+
+			wins = wins +1;
+
 			guesses = 15;
 
 			chosen_word = array_of_words[random_index()];
@@ -155,11 +171,37 @@
 			array_of_used_letters = [];
 
 			blank_word = blank_space_filler(chosen_word,blank_array);
+
+			document.querySelector("#wins").innerHTML = "Wins: " + wins;
 			document.querySelector("#letters_used").innerHTML = "";
 			document.querySelector("#current_word").innerHTML = blank_word.join("");
 			document.querySelector("#guesses_remaining_title").innerHTML = changing_guesses;
 			document.querySelector("#guesses_remaining_number").innerHTML = guesses;
+			var snd = new Audio("win.mp3"); // buffers automatically when created
+			snd.play();
+			if(winning_word==="messi"){
+			document.querySelector("#image_win").innerHTML = messi_image;
+			}
 
+			if(winning_word==="crouch"){
+			document.querySelector("#image_win").innerHTML = crouch_image;
+			}
+
+			if(winning_word==="payet"){
+			document.querySelector("#image_win").innerHTML = payet_image;
+			}
+
+			if(winning_word==="robben"){
+			document.querySelector("#image_win").innerHTML = robben_image;
+			}
+
+			if(winning_word==="cuauhtemoc"){
+			document.querySelector("#image_win").innerHTML = cuau_image;
+			}
+
+			if(winning_word==="ronaldo"){
+			document.querySelector("#image_win").innerHTML = ronaldo_image;
+			}
 
 		}
 
@@ -180,21 +222,14 @@
 			document.querySelector("#current_word").innerHTML = blank_word.join("");
 			document.querySelector("#guesses_remaining_title").innerHTML = changing_guesses;
 			document.querySelector("#guesses_remaining_number").innerHTML = guesses;
+			
+			var snd = new Audio("boo.mp3"); // buffers automatically when created
+			snd.play();
+
 
 		}
 
 		}
-
-
-		// 	else if(chosen_word[i] != user_guess){
-		// 		// guesses = guesses - 1;
-		// 		console.log(counter+1);
-		// 		// document.querySelector("#guesses_remaining_number").innerHTML = changing_guesses;
-		// 		break;
-
-		// 	}
-
-		// }
 
 </script>
 
