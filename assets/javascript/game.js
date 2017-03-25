@@ -21,7 +21,7 @@ var game = {
 
 		word_chooser: 
 			function(){
-				return game.array_of_words[game.random_index()];
+				return this.array_of_words[this.random_index()];
 			},
 
 		blank_space_filler: 
@@ -60,13 +60,15 @@ var game = {
 
 	document.querySelector("#guesses_remaining_number").innerHTML = game.guesses;
 
-	document.onkeyup = function(event) {
+	document.onkeypress = function(event) {
+
+		console.log(String.fromCharCode(event.keyCode));
 
 		var key_up = {
 
 			changing_word: blank_word,
 
-			user_guess: event.key,
+			user_guess: String.fromCharCode(event.keyCode),
 
 			letter_title: "<p style='font-size: 30px'>You have already used: </p>",
 
