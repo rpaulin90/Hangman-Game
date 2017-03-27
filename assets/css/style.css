@@ -1,0 +1,55 @@
+
+
+body {
+
+	background-image: url(../images/grass_background.jpg);
+	font-family: 'VT323', monospace;
+
+}
+
+.hangmanContainer {
+
+	border-radius: 15px; 
+	opacity: 0.6;
+
+}
+
+
+.hangman-title {
+
+	font-family: 'Permanent Marker', cursive;
+
+}
+
+.hangmanMainContainer {
+
+	height: 100%;
+
+}
+
+.hangmanJumbotron {
+
+	margin-top: 20px;
+	background-color: #333333; 
+	color: white; 
+	opacity: 0.8;
+
+}
+
+.font30 {
+
+	font-size: 30px;
+
+}
+
+.font40 {
+
+	font-size: 40px;
+
+}
+
+#image_win {
+
+	opacity: 0.9;
+
+}

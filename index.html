@@ -6,44 +6,45 @@
 	<title>Hangman-Game</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker|VT323" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
-<body style="background-image: url(assets/images/grass_background.jpg); font-family: 'VT323', monospace;">
+<body>
 
-	<div class="container bg-info" style="border-radius: 15px; opacity: 0.6">
+	<div class="container bg-info hangmanContainer">
 		<div class="page-header text-center">
-			<h1 style="font-family: 'Permanent Marker', cursive;">The Hangman Game</h1>
+			<h1 class="hangman-title">The Hangman Game</h1>
 		</div>
 	</div>
 
-	<div class="container" style="height: 100%">
-		<div class="jumbotron text-center" style="margin-top: 20px;background-color: #333333; color: white; opacity: 0.8">
+	<div class="container hangmanMainContainer">
+		<div class="jumbotron text-center hangmanJumbotron">
 			<div class="row">
-				<h2>
+				<h2 class="startPrompt">
 					Press Any Key To Get Started
 				</h2>
 			</div>
 			<div class="row text-center">
-				<div class="col-xs-12" id="wins" style="font-size: 30px"></div>	
+				<div class="col-xs-12 font30" id="wins"></div>	
+			</div>
+			<div class="row text-center font40">
+				<div class="col-xs-12" id="current_word"></div>	
 			</div>
 			<div class="row text-center">
-				<div class="col-xs-12" id="current_word" style="font-size: 40px"></div>	
+				<div class="col-xs-12 font30" id="guesses_remaining_title"></div>	
 			</div>
 			<div class="row text-center">
-				<div class="col-xs-12" id="guesses_remaining_title" style="font-size: 30px"></div>	
+				<div class="col-xs-12 font30" id="guesses_remaining_number"></div>	
 			</div>
 			<div class="row text-center">
-				<div class="col-xs-12" id="guesses_remaining_number" style="font-size: 30px"></div>	
+				<div class="col-xs-12 font30" id="letters_used_title"></div>	
 			</div>
 			<div class="row text-center">
-				<div class="col-xs-12" id="letters_used_title" style="font-size: 30px"></div>	
-			</div>
-			<div class="row text-center">
-				<div class="col-xs-12" id="letters_used" style="font-size: 30px"></div>	
+				<div class="col-xs-12 font30" id="letters_used"></div>	
 			</div>
 		</div>
 	</div>
 	<div class="container text-center">
-			<div id="image_win" style="opacity: 0.9"></div>
+			<div id="image_win"></div>
 	</div>
 
 	<script src="assets/javascript/game.js"></script>
