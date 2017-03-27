@@ -69,7 +69,7 @@ var game = {
 
 		if(game.contains(game.abc,valid_letter)){
 
-			document.querySelector(".startPrompt").innerHTML = "Keep Pressing those letters!";
+			document.querySelector(".startPrompt").innerHTML = "Keep Pressing Those Letters!";
 
 			console.log(String.fromCharCode(event.keyCode));
 
@@ -142,7 +142,7 @@ var game = {
 					alert("You went through all the words!! game will restart");
 					game.words_used = [];
 					game.wins = 0;
-					document.querySelector(".startPrompt").innerHTML = "Press Any Key To Get Started!";
+					document.querySelector(".startPrompt").innerHTML = "Press Any Letter To Get Started!";
 				}
 
 				// we display the image of the soccer player whose name was guessed
