@@ -65,8 +65,9 @@ var game = {
 
 	document.onkeypress = function(event) {
 
+		var valid_letter = String.fromCharCode(event.keyCode).toLowerCase();
 
-		if(game.contains(game.abc,String.fromCharCode(event.keyCode))){
+		if(game.contains(game.abc,valid_letter)){
 
 			document.querySelector(".startPrompt").innerHTML = "Keep Pressing those letters!";
 
@@ -76,7 +77,7 @@ var game = {
 
 				changing_word: blank_word,
 
-				user_guess: String.fromCharCode(event.keyCode),
+				user_guess: valid_letter,
 
 				letter_title: "<p style='font-size: 30px'>You have already used: </p>",
 
